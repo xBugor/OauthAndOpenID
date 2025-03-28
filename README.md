@@ -50,7 +50,7 @@ Her biri farklı karmaşıklık ve güvenlik hususları düzeylerine sahip birka
 
 OAuth 2.0 Akış (Flow) Türleri/ hibe türleri(grant types)
 
-1️⃣ Authorization Code Flow (Yetkilendirme Kodu Akışı)
+⭐ Authorization Code Flow (Yetkilendirme Kodu Akışı)
 
 ✅ En güvenli yöntemdir.
 
@@ -58,19 +58,46 @@ OAuth 2.0 Akış (Flow) Türleri/ hibe türleri(grant types)
 
 🔹 Nasıl Çalışır?
 
-Kullanıcı giriş yapar → Yetkilendirme kodu alınır.
+* Kullanıcıya, talep edilen erişime izin verip vermediği sorulur. 
 
-Yetkilendirme kodu ile Access Token talep edilir.
+* Eğer kullanıcı kabul ederse, istemci uygulamaya bir "yetkilendirme kodu" (authorization code) verilir.
 
-Token sunucuda saklanır (güvenli).
+* Daha sonra istemci uygulama, bu kodu OAuth hizmeti ile değiştirerek bir access token alır. 
 
-🔹 Kullanım Alanı: Web ve mobil uygulamalar.
+* Bu erişim belirteci, API çağrıları yaparak ilgili kullanıcı verilerini almak için kullanılır.
+
+* Güvenli bir kanal kurulur bu OAuth  ilk defa kurulunca
+
+**Token sunucuda saklanır (güvenli).**
 
 
 
 
-![](./assets/oauth-authorization-code-flow.jpg)
+
+<img src="./assets/oauth-authorization-code-flow.jpg" alt="alt yazı" width="500">
+
+
 [portswigger][2]
+
+
+
+⭐ **2. Implicit Grant (Dolaylı Yetkilendirme Akışı)**
+
+Önce bir authorization code (yetkilendirme kodu) alıp sonra bunu bir erişim belirteciyle değiştirmek yerine, istemci uygulaması erişim belirtecini kullanıcı onayını verdikten hemen sonra alır.
+
+* Çok daha az güvenlidir.  
+* Tüm iletişim tarayıcı yönlendirmeleri aracılığıyla gerçekleşir.-
+* Authorization Code Flowda olduğu gibi güvenli bir arka kanal yoktur.
+
+<img src="./assets/oauth-implicit-flow.jpg" alt="alt yazı" width="500">
+
+[portswigger][2]
+
+
+⭐ 3.**Proof Key for Code Exchange (PKCE**
+
+
+
 
 
 
@@ -83,7 +110,7 @@ Token sunucuda saklanır (güvenli).
 
 * [Researchgate](https://www.researchgate.net/figure/Sequence-Diagram-of-Interaction-with-Our-OAuth2-authorization-RESTful-Feed-Sharing-Service_fig3_272823002)
 
-
+* [frontegg](https://frontegg.com/blog/oauth-grant-types)
 
 
 
