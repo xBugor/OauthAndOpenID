@@ -11,8 +11,25 @@ Muhtemelen sosyal medya hesabınızı kullanarak giriş yapmanıza izin veren si
 
 #### ÖRNEK
 
+```mermaid
+sequenceDiagram
+    participant Kullanıcı
+    participant Forum
+    participant Google
+    participant OAuth as OAuth Sağlayıcısı
 
-OAuth 2.0'ın temel işleyişi şu adımlardan oluşur:
+    Kullanıcı->>Forum: "Google ile Giriş Yap" seçeneğine tıklar
+    Forum->>OAuth: Kullanıcıyı Google'a yönlendirir
+    OAuth->>Google: Kimlik doğrulama isteği iletir
+    Google->>Kullanıcı: "Bu uygulamaya yetki vermek istiyor musunuz?"
+    Kullanıcı->>Google: Giriş yapar ve izin verir
+    Google->>Forum: Authorization Code döner
+    Forum->>Google: Authorization Code ile Access Token talep eder
+    Google->>Forum: Access Token döner
+    Forum->>Google: Kullanıcının bilgilerini talep eder
+    Google->>Forum: Kullanıcının adı ve e-posta adresini döner
+    Forum->>Kullanıcı: Kullanıcı bilgileriyle giriş işlemini tamamlar
+```
 
 ▶️ Kullanıcı bir uygulamaya giriş yapmak ister → Örneğin, bir sitenin giriş  forumuna "Google ile Giriş Yap" seçeneği eklediniz.
 
@@ -28,11 +45,12 @@ OAuth 2.0'ın temel işleyişi şu adımlardan oluşur:
 
 🔹 Önemli: OAuth sadece yetkilendirme yapar, kimlik doğrulama için OpenID Connect (OIDC) kullanılır.
 
-Gerçek OAuth sürecinin uygulanabileceği çok sayıda farklı yol vardır. Bunlar OAuth "akışları"(flows) veya "hibe türleri"(grant types) olarak bilinir. 
+Gerçek OAuth sürecinin uygulanabileceği çok sayıda farklı yol vardır. Bunlar OAuth **"akışları"(flows)** veya **"hibe türleri"**(grant types) olarak bilinir. 
+Her biri farklı karmaşıklık ve güvenlik hususları düzeylerine sahip birkaç farklı hibe türü vardır. 
 
-OAuth 2.0 Akış (Flow) Türleri
+OAuth 2.0 Akış (Flow) Türleri/ hibe türleri(grant types)
 
-1️⃣ Authorization Code Flow (Önerilen)
+1️⃣ Authorization Code Flow (Yetkilendirme Kodu Akışı)
 
 ✅ En güvenli yöntemdir.
 
@@ -47,3 +65,25 @@ Yetkilendirme kodu ile Access Token talep edilir.
 Token sunucuda saklanır (güvenli).
 
 🔹 Kullanım Alanı: Web ve mobil uygulamalar.
+
+
+
+
+![](./assets/oauth-authorization-code-flow.jpg)
+[portswigger][2]
+
+
+
+[1]: https://www.researchgate.net/figure/Sequence-Diagram-of-Interaction-with-Our-OAuth2-authorization-RESTful-Feed-Sharing-Service_fig3_272823002
+
+[2]: https://portswigger.net/web-security/oauth/grant-types
+
+### KAYNAKÇA
+----
+
+* [Researchgate](https://www.researchgate.net/figure/Sequence-Diagram-of-Interaction-with-Our-OAuth2-authorization-RESTful-Feed-Sharing-Service_fig3_272823002)
+
+
+
+
+
